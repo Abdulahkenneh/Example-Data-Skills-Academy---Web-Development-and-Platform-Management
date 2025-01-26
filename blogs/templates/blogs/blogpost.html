@@ -1,0 +1,630 @@
+{% extends 'blogs/base.html' %}
+{% block title %}Blog Post | {% endblock %}
+{% load widget_tweaks %}
+{% load static %}
+{% load highlight %}
+{% load custom_filters %}
+
+{% block og-title %}{{ post.title }}{% endblock %}
+{% block author %}{{ post.user }}{% endblock %}
+
+
+
+
+{% block og-image %}
+{% if post.thumbnail %}
+    {{ post.thumbnail.url }}
+{% endif %}
+{% endblock %}
+
+
+{% block linkedin-title %}{{ post.title }}{% endblock %}
+{% block linkedin-image %}
+{% if post.thumbnail %}
+    {{ post.thumbnail.url }}
+{% endif %}
+{% endblock %}
+
+{% block content %}
+{{ form.media }}
+<style>
+    {{ pygments_css|safe }}
+</style>
+
+{% block extral %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6418170247779457"
+     crossorigin="anonymous"></script>
+<!-- Try some kind Cup Coffee today -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-6418170247779457"
+     data-ad-slot="9053847334"
+     data-ad-format="auto"
+     data-full-width-responsive="true">
+
+</ins>
+{% endblock extral %}
+
+
+<div class="scroll-washer"></div>
+
+
+
+
+<button style='margin-top:4rem;width:200px;border-bottom-right-radius:15px;' class="btfn btn-primary fixed-top" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions"><i class="fas fa-chevron-circle-down">Table OF Contents </i></button>
+
+<div class="offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
+  <div class="offcanvas-header" style='background:hsl(220, 68%, 54%)'>
+    <h5 class="offcanvas-title" id="offcanvasWithBothOptionsLabel"></h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body">
+    <div   >
+            {% if tables_of_content %}
+                <h2>Table of Contents</h2>
+                <ul>
+                    {% for table in tables_of_content %}
+                        <li>{{ table.heading|safe }}</li>
+                    {% endfor %}
+                </ul>
+                {% else %}
+                <h2>Posts</h2>
+                {% for post in page_obj %}
+                 <a href="{% url 'blogs:post-detail' post.id %}">{{post.title}}</a>
+                 {% endfor %}
+
+
+            {% endif %}
+      </div>
+  </div>
+</div>
+
+
+
+ <div class="row ">
+    <!--<aside class="col-md-3 mb-4 mt-4" >-->
+    <!--    <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">-->
+
+    <!--        <div class="carousel-inner">-->
+    <!--            {% if topics %}-->
+    <!--            <h2 style='margin-top:2rem;padding-left:1rem;' >Topics</h2>-->
+    <!--            {% for topic in topics %}-->
+
+    <!--            <div class="carousel-item {% if forloop.first %}active{% endif %}">-->
+    <!--                <div class="row justify-content-center">-->
+    <!--                    <div class="col">-->
+    <!--                        <div class="my-topic-container">-->
+    <!--                    <ul style="list-style-type: none; padding: 0; margin-top:10px">-->
+    <!--                        <li class="topic-item">-->
+    <!--                           <a href="{% url 'blogs:topics' topic.id %}" class="topic-title" style='text-decoration:none;'>{{ topic.title }}</a>-->
+    <!--                        </li>-->
+    <!--                    </ul>-->
+    <!--                      </div>-->
+    <!--                    </div>-->
+    <!--                </div>-->
+    <!--            </div>-->
+
+
+    <!--            {% endfor %}-->
+    <!--            <a href = 'www.dataskillacademy.com?utm_source=linkedin&utm_medium=email&utm_campaign=how-to-master-data-cleaning'>Join us to master the act of data clearning </a>-->
+      <!--    <div   >-->
+      <!--      {% if tables_of_content %}-->
+      <!--          <h2>Table of Contents</h2>-->
+      <!--          <ul>-->
+      <!--              {% for table in tables_of_content %}-->
+      <!--                  <li>{{ table.heading|safe }}</li>-->
+      <!--              {% endfor %}-->
+      <!--          </ul>-->
+      <!--      {% endif %}-->
+      <!--</div>-->
+    <!--        </div>-->
+    <!--        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">-->
+    <!--            <span class="carousel-control-prev-icon" aria-hidden="true"></span>-->
+    <!--            <span class="visually-hidden">Previous</span>-->
+    <!--        </button>-->
+    <!--        <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">-->
+    <!--            <span class="carousel-control-next-icon" aria-hidden="true"></span>-->
+    <!--            <span class="visually-hidden">Next</span>-->
+    <!--        </button>-->
+    <!--        {% endif %}-->
+    <!--    </div>-->
+    <!--</aside>-->
+
+   <div class="col-md-9" style='margin-top:5rem'>
+    <div class="card mb-4">
+        <div class="card-body" >
+            <form method="GET" action="{% url 'blogs:search' %}" style=";margin-bottom: 40px; text-align: center; display: flex; justify-content: center; width: 80%; margin: 0 auto;">
+            <input type="text" name="query" placeholder="Search for anything..." value="{{ query }}" style="width: 60%; height: 50px; padding: 0 10px; border-radius: 4px 0 0 4px; border: 1px solid #ccc; font-size: 16px; box-sizing: border-box;">
+            <button type="submit" style="width: 100px; height: 50px;margin:0 ! important; border: none; border-radius: 0 4px 4px 0; background-color: #007bff; color: #fff; font-size: 16px; cursor: pointer;">Search</button>
+
+        </form>
+            <a class="btn btn-primary mb-2" href="{% url 'blogs:entry' %}">Create Post</a>
+
+
+
+
+
+
+
+
+
+            {% if post %}
+                <p style="color: black;">
+                    {% if post.user.profile.image %}
+                        <img src="{{ post.user.profile.image.url }}" alt="Profile Picture" class="profile-picture" style="width: 50px; height: 50px; border-radius: 50%;">
+                    {% else %}
+                        <img src="{% static 'images/th.jpg' %}" alt="Profile Picture" style="width: 40px; height: 40px; border-radius: 50%;">
+                    {% endif %}
+                    Last updated - by <a href="{% url 'blogs:user-pofolio' post.id %}" style="font-weight: bold;" rel="author">
+                        {% if post.user.is_superuser %}
+                            {{ post.user.profile.firstname }} - Admin
+                        {% else %}
+                            {{ post.user.profile.firstname }}
+                        {% endif %}
+                    </a> on {{ post.created_at|date:'M d, Y H:i' }}
+                </p>
+
+                <h1 class="post-title  title playfair-display-title display-2" style="font-family: Roboto; font-weight: 800; margin-bottom: 50px;padding:16px;">
+                    {{ post.title }}
+                </h1>
+
+                {% if post.thumbnail and post.thumbnail.name %}
+                <div class="d-flex justify-content-center">
+                    <img src="{{ post.thumbnail.url }}" alt="{{ post.title }} image" class="img-fluid" style="width: 90%; height: auto; margin-bottom: 1rem;">
+                </div>
+                {% endif %}
+
+                <article class="codehilite " style="overflow-x: auto; padding:20px;">
+                    {{ post.body|syntax_highlight|safe }}
+                </article>
+
+                {% if post.user.is_superuser or post.user.is_staff %}
+                    <div class="badge-base LI-profile-badge" data-locale="en_US" data-size="medium" data-theme="dark" data-type="VERTICAL" data-vanity="abdulah-mamadee-kenneh-399023175" data-version="v1">
+                        <a class="badge-base__link LI-simple-link" href="https://de.linkedin.com/in/abdulah-mamadee-kenneh-399023175?trk=profile-badge"></a>
+                    </div>
+                {% endif %}
+
+
+
+                <!-- Social Media Sharing Buttons -->
+                <div class="mt-4">
+                    <p>Please Share this post:</p>
+                    <!-- Facebook Share Button -->
+                    <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}" target="_blank" class="btn btn-primary mr-2 mb-2">
+                        <i class="fab fa-facebook-f "></i> Share on Facebook
+                    </a>
+
+                    <!-- LinkedIn Share Button -->
+                    <a href="https://www.linkedin.com/shareArticle?url={{ request.build_absolute_uri }}&title={{ post.title }}&summary={{ post.body|truncatechars:200 }}&source=YourSource" target="_blank" class="btn btn-primary mr-2 mb-2">
+                        <i class="fab fa-linkedin-in " ></i> Share on LinkedIn
+                    </a>
+
+                    <!-- Twitter Share Button -->
+                    <a href="https://twitter.com/intent/tweet?url={{ request.build_absolute_uri }}&text={{ post.title }}&via=YourTwitterHandle" target="_blank" class="btn btn-primary mb-2">
+                        <i class="fab fa-twitter "></i> Share on Twitter
+                    </a>
+                </div>
+
+            {% else %}
+                <h1 class="card-title post-title">Blog Post Title</h1>
+                <article class="post-content">
+                    <p>Coming soon...</p>
+                </article>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+
+<div class="d-flex" style="height: 200px;">
+    <div class="v"></div>
+  </div>
+
+<div style='display:flex;flex-wrap:wrap'>
+<!-- Embedding the Twitter tweet -->
+    <blockquote class="twitter-tweet">
+        <p lang="en" dir="ltr">At dawn from the gateway to Mars, the launch of Starship’s second flight test <a href="https://t.co/ffKnsVKwG4">pic.twitter.com/ffKnsVKwG4</a></p>
+        &mdash; SpaceX (@SpaceX) <a href="https://twitter.com/SpaceX/status/1732824684683784516?ref_src=twsrc%5Etfw">December 7, 2023</a>
+    </blockquote>
+    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+    <div style="background-color: #f8f9fa; padding: 20px; border-radius: 10px; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); max-width: 600px; margin: 20px auto; font-family: Arial, sans-serif;">
+    <h2 style="color: #333; font-size: 24px; text-align: center; margin-bottom: 20px;"> <a href= style="display: inline-block; margin-top: 30px; background-color: #2980b9; color: white; padding: 15px 25px; font-size: 1.2em; text-decoration: none; border-radius: 5px;">
+            What Makes Us Special
+        </a></h2>
+    <p style="color: #555; font-size: 16px; line-height: 1.6; text-align: justify;">
+        At <strong>Data Skills Academy</strong>, we go beyond traditional online courses. Our live, interactive sessions with experienced instructors set us apart, offering you real-time guidance as you work on practical, portfolio-building projects. We don’t just teach; we mentor, ensuring that you gain hands-on experience and personalized feedback every step of the way. Our commitment to your success is what truly makes us special.
+    </p>
+</div>
+</div>
+<br>
+<br>
+
+
+ <div class="container mb-4">
+      <div class="row">
+          <div class="col">
+                <h1 class="posts-title p-2">Stay Updated: Our Latest Posts</h1>
+          </div>
+      </div>
+  </div>
+
+
+
+
+
+
+<div class="recent-posts mt-6">
+    <div class="row">
+        {% for post in page_obj|slice:'8' %}
+        <div class="col-12 col-md-4 mb-4">
+            <div class="card h-200" style="height: 500px; overflow: hidden;">
+                <div id="carousel{{ forloop.counter }}" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner  ">
+                        <div class="carousel-item active">
+                            <div class="card-body" style="max-height:450px;">
+                                {% if post.thumbnail %}
+                                <img src="{{post.thumbnail.url }}" class="img-fluid" alt="Data Analyst" style="width: 100%; height: 250px;">
+                                {% endif %}
+                                <h5 class="card-title m-2">{{ post.title }}</h5>
+                                <p class="card-text">{{ post.body|safe }}</p>
+                            </div>
+                        </div>
+                        <div class="carousel-item" style="max-height:450px;">
+                            <div class="card-body">
+                                <p class="card-text">{{ post.body|safe }}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carousel{{ forloop.counter }}" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carousel{{ forloop.counter }}" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+
+                <a href="{% url 'blogs:post-detail' post.id %}" class="btn btn-primary read-more-link m-2" data-post-id="{{ post.id }}" style="width:40%;">Read more</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<style>
+    .post-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr); /* Three cards per row by default */
+        gap: 20px;
+    }
+
+ </style>
+
+
+<nav>
+    <ul class="pagination justify-content-center">
+        {% if page_obj.has_previous %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ page_obj.previous_page_number }}" style='height:100%'>Previous</a>
+            </li>
+        {% endif %}
+        {% for num in page_obj.paginator.page_range %}
+            <li class="page-item {% if page_obj.number == num %}active{% endif %}">
+                <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+            </li>
+        {% endfor %}
+        {% if page_obj.has_next %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ page_obj.next_page_number }}" style='height:100%'>Next</a>
+            </li>
+        {% endif %}
+    </ul>
+</nav>
+
+
+
+
+
+<div class="container mt-5">
+    <div class="card-body p-4">
+        {% if comments %}
+        <h4 class="mb-0">Recent comments</h4>
+        <p class="fw-light mb-4 pb-2">Latest Comments section by users</p>
+        <div class="comments-section">
+            {% for comment in comments %}
+            <div class="comment mb-4">
+                {% if comment.user.is_authenticated %}
+                    {% if comment.user.profile.image %}
+                    <img src="{{ comment.user.profile.image.url }}" alt="{{ comment.title }}" class="comment-image">
+                    {% else %}
+                    <img src="{% static 'images/th.jpg' %}" alt="{{ comment.title }}" class="comment-image">
+                    {% endif %}
+                    <div class="comment-content">
+                        <h6 class="fw-bold mb-1">{{ comment.user.profile.firstname }}</h6>
+                        <div class="comment-meta mb-3">
+                            <p class="mb-0">
+                                on {{ comment.date|date:'M d, Y H:i' }}
+                                <span class="badge bg-primary">Aproved</span>
+                            </p>
+                            <a href="#!" class="link-muted"><i class="fas fa-pencil-alt ms-2"></i></a>
+                            <a href="#!" class="link-muted"><i class="fas fa-redo-alt ms-2"></i></a>
+                            <a href="#!" class="link-muted"><i class="fas fa-heart ms-2"></i></a>
+                        </div>
+                        <p class="mb-2">{{ comment.message }}</p>
+                    </div>
+                {% else %}
+                    <img src="{% static 'images/th.jpg' %}" alt="{{ comment.title }}" class="comment-image">
+                    <div class="comment-content">
+                        <h6 class="fw-bold mb-1">User</h6>
+                        <div class="comment-meta mb-3">
+                            <p class="mb-0">
+                                on {{ comment.date|date:'M d, Y H:i' }}
+                                <span class="badge bg-primary"></span>
+                            </p>
+                            <a href="#!" class="link-muted"><i class="fas fa-pencil-alt ms-2"></i></a>
+                            <a href="#!" class="link-muted"><i class="fas fa-redo-alt ms-2"></i></a>
+                            <a href="#!" class="link-muted"><i class="fas fa-heart ms-2"></i></a>
+                        </div>
+                        <p class="mb-2">{{ comment.message }}</p>
+                    </div>
+                {% endif %}
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <h2 style="text-align:center">Your feedback is appreciated</h2>
+        {% endif %}
+
+        <div class="col-md-6">
+            <form method="post" action="" class="comment-form">
+                {% csrf_token %}
+                <label for="name">
+                    {% render_field form.title placeholder='Enter Title' class+='form-control' %}
+                </label>
+                {% render_field form.message placeholder='Comment' class+='form-control' %}
+                <button type="submit" name="contact_submit" class="btn btn-primary mt-2 mb-2">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+</body>
+
+<style>
+    .comments-section {
+        display: block;
+    }
+    .comment {
+        display: flex;
+        margin-bottom: 1rem;
+    }
+    .comment-image {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: inline-block;
+        margin-right: 1rem;
+    }
+    .comment-content {
+        display: block;
+    }
+    .comment-meta {
+        display: block;
+        margin-bottom: 0.5rem;
+    }
+    .link-muted {
+        margin-left: 0.5rem;
+    }
+    .comment-form {
+        display: block;
+        margin-top: 2rem;
+    }
+</style>
+
+
+<style>
+
+
+    .my-topic-container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #ffffff;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .topic-item {
+        background-color: #e9ecef;
+        margin-bottom: 10px;
+        padding: 15px;
+        border-radius: 5px;
+        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+        transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+
+    .topic-item:hover {
+        background-color: #dcdfe3;
+        transform: translateY(-3px);
+        font-weight: bold;
+    }
+
+    .topic-title {
+        margin: 0;
+        font-size: 20px;
+    }
+
+    .topic-description {
+        margin: 5px 0 0;
+        color: #555;
+    }
+</style>
+
+<!-- Other head elements -->
+
+
+
+
+
+
+    <div class="container" style="margin-top: 5rem;">
+    <div class="row">
+        <!-- Left Sidebar -->
+        <div class="col-md-3">
+            <!-- Content for the left sidebar goes here -->
+        </div>
+
+        <!-- Main Content -->
+        <div class="col-md-6">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <form method="GET" action="{% url 'blogs:search' %}" style="display: flex; align-items: center; margin: 0;">
+    <!-- Adjusted input field width and height to fit in the navbar -->
+    <input type="text" name="query" placeholder="Search..." value="{{ query }}"
+        style="width: 150px; height: 2.5rem; padding: 0 8px; border-radius: 4px 0 0 4px; border: 1px solid #ccc; font-size: 14px; box-sizing: border-box;">
+
+    <!-- Adjusted button width and height to fit in the navbar -->
+    <button type="submit"
+        style="width: 80px; height: 2.5rem; margin: 0 !important; border: none; border-radius: 0 4px 4px 0; background-color: #007bff; color: #fff; font-size: 14px; cursor: pointer;">
+        Search
+    </button>
+</form>
+                    <div class="fs-xl">
+            Written by
+<a href="https://builtin.com/authors/tara-boyle" class="text-white d-inline-block border-bottom border-pretty-blue">Tara Boyle</a></div>
+
+
+
+
+                    <a class="btn btn-primary mb-2" href="{% url 'blogs:entry' %}">Create Post</a>
+
+                    {% if post %}
+                        <p style="color: black;">
+                            {% if post.user.profile.image %}
+                                <img src="{{ post.user.profile.image.url }}" alt="Profile Picture" class="profile-picture" style="width: 50px; height: 50px; border-radius: 50%;">
+                            {% else %}
+                                <img src="{% static 'images/th.jpg' %}" alt="Profile Picture" style="width: 40px; height: 40px; border-radius: 50%;">
+                            {% endif %}
+                            Last updated - by <a href="{% url 'blogs:user-pofolio' post.id %}" style="font-weight: bold;" rel="author">
+                                {% if post.user.is_superuser %}
+                                    {{ post.user.profile.firstname }} - Admin
+                                {% else %}
+                                    {{ post.user.profile.firstname }}
+                                {% endif %}
+                            </a> on {{ post.created_at|date:'M d, Y H:i' }}
+                        </p>
+
+                        <h1 class="post-title title playfair-display-title display-2" style="font-family: Roboto; font-weight: 800; margin-bottom: 50px; padding:16px;">
+                            {{ post.title }}
+                        </h1>
+
+                        {% if post.thumbnail and post.thumbnail.name %}
+                        <div class="d-flex justify-content-center">
+                            <img src="{{ post.thumbnail.url }}" alt="{{ post.title }} image" class="img-fluid" style="width: 90%; height: auto; margin-bottom: 1rem;">
+                        </div>
+                        {% endif %}
+
+                        <article class="codehilite" style="overflow-x: auto; padding:20px;">
+                            {{ post.body|syntax_highlight|safe }}
+                        </article>
+
+                        {% if post.user.is_superuser or post.user.is_staff %}
+                            <div class="badge-base LI-profile-badge" data-locale="en_US" data-size="medium" data-theme="dark" data-type="VERTICAL" data-vanity="abdulah-mamadee-kenneh-399023175" data-version="v1">
+                                <a class="badge-base__link LI-simple-link" href="https://de.linkedin.com/in/abdulah-mamadee-kenneh-399023175?trk=profile-badge"></a>
+                            </div>
+                        {% endif %}
+
+                        <!-- Social Media Sharing Buttons -->
+                        <div class="mt-4">
+                            <p>Please Share this post:</p>
+                            <!-- Facebook Share Button -->
+                            <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}" target="_blank" class="btn btn-primary mr-2 mb-2">
+                                <i class="fab fa-facebook-f"></i> Share on Facebook
+                            </a>
+
+                            <!-- LinkedIn Share Button -->
+                            <a href="https://www.linkedin.com/shareArticle?url={{ request.build_absolute_uri }}&title={{ post.title }}&summary={{ post.body|truncatechars:200 }}&source=YourSource" target="_blank" class="btn btn-primary mr-2 mb-2">
+                                <i class="fab fa-linkedin-in"></i> Share on LinkedIn
+                            </a>
+
+                            <!-- Twitter Share Button -->
+                            <a href="https://twitter.com/intent/tweet?url={{ request.build_absolute_uri }}&text={{ post.title }}&via=YourTwitterHandle" target="_blank" class="btn btn-primary mb-2">
+                                <i class="fab fa-twitter"></i> Share on Twitter
+                            </a>
+                        </div>
+                    {% else %}
+                        <h1 class="card-title post-title">Blog Post Title</h1>
+                        <article class="post-content">
+                            <p>Coming soon...</p>
+                        </article>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Sidebar -->
+        <div class="col-md-3">
+            this is the right side
+            <!-- Content for the right sidebar goes here -->
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+     <!-- Add Alpine.js for the interactive behavior -->
+<script src="//unpkg.com/alpinejs" defer></script>
+
+<!-- Navbar Search Form -->
+<div class="d-flex align-items-center" x-data="{ open: false, searchTerm: '', companies: [] }">
+    <!-- Search Button -->
+    <button @click="open = !open" class="btn p-0" aria-label="search button">
+        <i class="fa-solid fa-magnifying-glass text-white fs-4"></i>
+    </button>
+
+    <!-- Dropdown Menu -->
+    <div x-show="open" class="dropdown-menu p-3" style="position: absolute; top: 60px; right: 0; min-width: 300px;" @click.away="open = false">
+        <!-- Search Input -->
+        <div class="input-group">
+            <span class="input-group-text bg-white border-end-0">
+                <i class="fa-solid fa-magnifying-glass text-dark"></i>
+            </span>
+            <input type="text" class="form-control border-start-0" placeholder="Search..." x-model="searchTerm" @input.debounce.200ms="updateCompanies()">
+        </div>
+
+        <!-- Search Results -->
+        <div class="mt-3" x-show="searchTerm.length > 0">
+            <template x-for="company in companies" :key="company.id">
+                <a :href="company.link" class="dropdown-item">
+                    <div class="d-flex align-items-center">
+                        <div class="me-2">
+                            <img :src="company.logo" alt="Company Logo" style="width: 30px; height: 30px;">
+                        </div>
+                        <div>
+                            <div x-text="company.name" class="fw-bold"></div>
+                            <div x-text="company.industry" class="text-muted fs-6"></div>
+                        </div>
+                    </div>
+                </a>
+            </template>
+            <template x-if="companies.length === 0 && searchTerm.length > 0">
+                <div class="text-muted text-center">No results found</div>
+            </template>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+{% endblock %}

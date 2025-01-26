@@ -1,0 +1,10 @@
+/* static/css/summernote_custom.css */
+.note-editor .note-editable pre code {
+    background-color: #000; /* Black background */
+    color: #fff; /* White text */
+    padding: 10px; /* Padding around the code */
+    border-radius: 5px; /* Rounded corners (optional) */
+    overflow-x: auto; /* Horizontal scrolling if the code is too wide */
+    white-space: pre; /* Preserve whitespace and line breaks */
+    font-family: 'Courier New', Courier, monospace; /* Monospaced font */
+}

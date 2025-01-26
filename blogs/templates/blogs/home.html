@@ -1,0 +1,1292 @@
+{% extends 'blogs/base.html' %}
+
+{% block content %}
+{% load static %}
+{% load widget_tweaks %}
+{% load custom_filters %}
+<style>
+    .courses-title {
+        font-family: 'Poppins', sans-serif;
+        font-size: 2.5rem;
+        font-weight: 700;
+        text-align: center;
+        margin: 2rem 0;
+        color: #343a40;
+    }
+</style>
+
+
+
+<div class="scroll-washer"></div>
+
+<main class="" style='margin:0'>
+    <div class="row ">
+        <!-- Left Sidebar -->
+        <!-- Title and Image Section -->
+           <div class="row gradient-background3" style="background: linear-gradient(to right, #ff9a9e, #fad0c4);height:auto;">
+    <div class="col-md-6 mt-5">
+        <h1 class="display-4" style="font-size: 8vw;font-weight:bold;text-align:center">Advanced Data Analysis Techniques Unveiled</h1>
+        <h4 class="display-5 text-center">Welcome to the ultimate resource for data analytics insights, strategies, and practical advice.</h4>
+        <div class="text-center">
+            <a href="{% url 'blogs:all_courses' %}" class="btn btn-primary mt-5 mb-5">Learn More</a>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <img src="{% static 'images/Data-anaylist.webp' %}" class="img-fluid" alt="Data Analyst" style="max-width: 100%; height: auto;">
+    </div>
+</div>
+
+    </div>
+
+
+
+
+
+    <!-- Store itmes  -->
+
+
+    {% if items %}
+    <div class="container-fluid mt-4">
+    <div class="row">
+        <!-- Items List -->
+        <div class="col-12">
+            <div class="row">
+                {% for item in items %}
+                <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+                    <div class="card h-100">
+                        {% if item.image %}
+                        <img src="{{item.image.url}}" class="card-img-top" alt="{{ item.title }}">
+                        {% endif %}
+                        <div class="card-body">
+                            <h5 class="card-title">{{ item.name }}</h5>
+                            <p class="card-text">{{ item.description }}</p>
+                            <p class="card-text"><strong>${{ item.price }}</strong></p>
+                            <a href="" class="btn btn-primary">View Details</a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            {% if not items %}
+            <div class="col-12">
+                <p>No items found.</p>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<div id="installBanner" style="display:none ;">
+  <p>Install our app for a better experience!</p>
+  <button id="installButton">Install</button>
+</div>
+
+{% endif %}
+
+<div class="d-flex" style="height: 100px;">
+  <div class="v"></div>
+</div>
+
+<div class="container-fluid col-11 home-annimation" style="background:#6f23ff;padding:1rem;height:auto; border-radius:15px;justify-content:center; ">
+        <div class="row content" style="display:flex; flex-direction:row; align-items:center; gap:1rem; width:100%;">
+            <img class='col col-md-3 col-12' src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxISERUPEhIPEBUXFRYQFRcVERUVFRUQFxYWFxUWFRYZHSggGBslHRYWITEhJSorLi4uGCAzOzMtNygtLi0BCgoKDg0OGxAQGjYlHyUtLS0tLTUvMC0tLS0tLS0tLS0tLy0tLS0tLTUtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLf/AABEIAKgBLAMBEQACEQEDEQH/xAAcAAEAAgIDAQAAAAAAAAAAAAAABAUCAwEGBwj/xABCEAACAgECBAQDBQUGAgsAAAABAgADEQQSBRMhMQYiQVEUMmEHI3GBkUJSYrHBFjOSodHSF2MVJUNTcoKUorPC4f/EABsBAQADAQEBAQAAAAAAAAAAAAABAgQDBQYH/8QAMxEBAAICAAQEBQIFBAMAAAAAAAECAxEEEiExBUFRYRMiMnGRFIGhsdHh8BUjUsEGJGL/2gAMAwEAAhEDEQA/APDYCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIFv4U4Sur1SadmZQy2uSu3d93U9mBuIHXZjqcdZx4jLOLHN49v4zpMRuV7qfCelQXW/FFq9Pt5wCobAbUQ0om1ijNvLo2CQOWT69OEcXkma1ivW3b06d59e3ZPK51HhDTsthovcFE0lp+INNSFdVWLFAcvjIU4x6mRHF3rMRevfmjpufpNQ36vwHWhsr51xsxq7K25I5Ar0tlyEW2bsqzck9hhSy57yteOmdTrp8u+vX5ojtH7nL5IvifwWukVrFu5qfFDSI23GcCzmBhnyurV4x7EH1Etw/G/FnUxqeXcx/L8k1038W8FUo9ldVtthr1FGlbrTZ/e2XVlsVOxQg1jytg5YSKcZaaxa0a3Ez5+URPmTVF1/g9a7zStrsvw2q1QbYOrUNqQq9D2bkDr/EZanGc1OaY84j86/qaafC/hddQzC2wp5V5SVtUz2WO+1ayWcLU59FcqW9J0z8ROOImsff2j19/2REbTdP4PptOkSt9Vvv5j2bqlPKqoLreQFYlmyh2j1yB3nG3GWrF5tEdNa999k8rXxLwcumFvObUsRdZRSKaA+QtSWrZblhtDLYh298bj+z1nHxc5dcsR23O599agmNMfFHg5dG1Sc028201hgF2oo2eVyD0t84O30Uj36OH4340WnWtR+f7E10tf+H+nLWkX3rVU2oqfmJXU7WUFAWrZn2Gs7upOMED3nL9ffURqNzrtuY6+vunlVtPhCl156XPyM2Us2EYrqhclddeVYqQy21vkHsHxnE624y1Z5Zjr3/bW5n9tI044/4TopXUmm2yw6fYCCan3FrXrOeWx24C5wevWTi4ub8vNGubfrHlvzJhZaf7O62t5HPvDVvWlzGlVrbmozqdOxfzY2/tYyDu7Ccr+ITWvNqNdddesanzg5UfX+DNLVRbqDqXYKQoUNpwy2Go2Gt25hVnBGNqEnrL14zJbJFOXvv19dehyw0eLfBKaSsWJcSckbbOWu8KiMzVbWJ6F1XawB6iOF4yc06mPxv115k106VN6pAQEBAQEBAQEBAQEBAQEBAQEDdo9M9tiU1rud2WtF6dXYgKOvTuYErT8Fve2ygIFerdzd7pWte1tjb3chV8xA6nuQIHCaK+u01qGV8tVlHGDkYcB1O0rtbqc4w3sYmInuN1PCtVynKpZy9yI2Cdtj7yiBQOlpDZHTOD+MjUb2MUq1bC0Y1BFaK1wy/krrIRN6+gTIAz8v0xHLX0/wAkSKhr3b4XdqQbibDW9rItpILGxw5CnOCdx747ysY6RO+WNx7DTxGjVoxruNrEnnn7zmK7FA/NDqSrnYwO8E9D3kxSsdoE6jh3EUvYVm9bWTmWOlx6owZ82Wq2Ou0nqepi1KWjUxA0jU8RqCotmtREc1pstt5Yt8y7ayp27vnHl75Mi2LHbe6x19jZoE4gbrAj6iq0q1lrPeaGKKfM1juy+p9T3icdJiImsdPYRWTVKoX78oSaF2szVtubLVoykq4LDOBkEjPWTy13vQmCniCWJpVbUq96Ii1C1wWrJZErZd3QDzDa3br2kfDpM7msfgQtVZqtu+w6nabM5c2bTeo25yehsA6e4kxWsdoE97uI/d6r4i9mdSKyNZuvNZZgdqB+YFyjemOkr8HHrXLGvsblHFWusNmfijtZrrS7OALakZi1hY9LAqtjPm9BLclfT2Eg6/iZrGq5+uKM7aZX+ItO5wA7IPNnsc+3f2Mp8DF/xj8Qnco7W68AITrgKQSFzdildvUgf9mNrfTofYy3w6bmdR19kNq0cQ026ms6msFDa602sV5fylrBW2APQlpNsdLTu0RP7DCujiFivgatlNZ1D5aza9WAC5ycOMADPXIH0jkr6CBbwy5SQanOHNOVUsptHdAy5DHp2BlhxZw25Q5am5QmBZmthyy3yh+nlz6Z7wIkBAQEBAQEBAQEBAQEBAQEBAseBcVOlt56ojuFdU3DIVnUpuKno2AT0PTMCyXxUTfbfZUrC9a+aqNyzza9jC2tgDsfem7sR5mGO2AsP7eE2G5tMhcM5rPNYbUeqqlg/TNjbalO4nuW+mA20/aLYuG5ClvIrZtYpy0R6wEqOVRijnJ65bzY7ghU2eKWOou1Brzza0qAyo2is1NUTtQKwBpQEbRkZHSBLv8AG7NqaNTyiOU9tu03u7M9395ixslVHTaMdOvckmBlrvG/Nzu0w3BLq63NzFxz9Mumsa0kfettRMHpjHrA32/aEzEk6dc/eFdtzqoNtfLfmKOlnQDGexz3ziBxo/Hj/Eb3XZWymtgGZtqtqHuZ0G5fP94ygggjuOsDnV+METVrdQtzoum+DDNYUtILMxcOQ2CM46jsOw7QI2j8c2VtkVl15Zq2vc+cG6y1nDLjFmLXXcMEZz9IGu/xpcb6bEDIlXJ+7Nhfmchw68xyMknAyRiBzd4zcUCipGqIC1hzcz4qrdnTCYCizrhnA69eg3NkOF8Zvyq0K2l60vQNzyELXLqFazlhejj4gnIb9kQNz+Onak1NVk8g6YNznAKtp0od7EHSxzs3AntnHXAwGzw9445PIpemsUVbWG1c2c5Wd+Zv6E55li4yMB+naBKr8fqtKqKrN9boagdRYwwgsINz5zaN9rZQgDbgZAHUK/U+NmsXY9OBsUDl3PW29WuKsWHdfv2G3p2HUdcht1fjxrEetqOloc2/fucvZXsblBsipchSFwQMY7YwG1ftFsDczkLu3sf719nLa86gAV9hYHOOZ32jGMnMCBb4wL6Y6Z6t/wB0KQzWZAYADmYK7g+FAGGAwACGAAAdXgICAgICAgICAgICAgICAgICAgICAgICAgd50PCeF7KrW1Hm+5tasuny2bayjZX5q7A7t71lYGx9Pw4hUblBbH0NYdNRWHrJTUJqLWG07VDbCyEAHCnOCDAicP1OgTQVpdULrbGtDCtE5o+8r2Nzd+6shd+F2kNn0gWQ4ToNMz0Oa7Xpdxaz21oW3aW5lFdbDPRyi+pDLn1ECHVwThrLv5+0MA5zq6Q1Bamp1r2FN1+bHsQsMbdmT2OQofEel0qbDpmYgmxGVrFsYFLCqvlVXAdcHGPf07BSwEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQM6rCpDKSrA5BBwQR2IPoYBmLHJyxOST1JJ7kn3gYQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQJGh0VlziupHsY9lUZOPf6D6yLWisblEzrus9b4Y1FaGwCu4L0s5Ni2mpvawL2/HqPrOcZqzOu33RzxKlxOqziAgIGdRIIiES3MpOVPfuvufXH1yJaUbjujkSqxAnaHhF9vyVsR+8fKv6nv+UpbJWveWnDwefN9Ff6M9XwW+vuhYe6+Yf5dR+cRkrPaVsvA58Xev/auIl2RxAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQECTw2gWXV1nID2Ihx3wzAHH6yt51WZRPZ2i662y67h2l5ekqr524Lu3WrSGJNtnVmJ2np269pniKxWMl+szr+KkaiOaWnQ8Fah6z8dVpdS6o6Ji7oLACgexVKjPTIOR16ybZYtE/JuCbb8nHGqRbprNRbVXVqKtQumsNY2rZlXJZlHl3ZXuuM5jHPLeKxO4mNlek6h1rS17nVD+0wX9TiaqxuYha9tVmU5eHrljltpBKHpknaWwfw2kH8p1jHG/Zx+NOu3Xza6NAOZtckKCu8qCSELKCVHqQG7Tletq1mY8odq3rMxvzX1Hh2ptzhbTWqWNlblYuyGvyYNSlOjg5wZgvxNq6jpudeXbv7+zZXDE7nyaOM8CFdPOUajdmsFH8zLuOoU5woPelSOg+Yy2LiZvk5Z1rr1/H9Vb4IrTcfj8qDUg5BKlc+4PXHQ4J7zZuJ7M8RMLHwlt+KQMAwIYdQD12kg9fwnLNvk6PR8K5Z4msWje3q3h7hnxOorpPyk7rD7VL1Y/T2/MTFjrz2h9VxvEfp8E2jv2j7y2+OdHWLk1dHWjUrzEwMAWL5bFx6dcH8SfadckR9UdpeZwOS01nFf6q9/s8w8Zgbq8AAkMScdT2xn/OdsG9S87xbXNXUOtzu8ggICAgICAgICAgICAgICAgICAgICAgIE3gjAamkkgAXVkk9gN46mUyfRP2RbtLtfDtM6cV1W9WTKa1xuUjKFLCGGe4IPeZrzE4a6/8Alzn6Y/Znp+MptQLxBFpCqDTqtIb3ToNyg8shlznHUdJW2KZmfk6+sTpHLPoi8WKHQ6iyutqardaj0Bht3VhLM7R6gZHboMy9N/ErEzuYr1/gtH1Q6eDjqJrdGQdvc/r795O0aSfjbMYB29u3Q9CCMH06gGTNpmNKxjiJ24bX3lg5tuLDoCbGyAe+DnInL4de2nXnt6sm4reSGN124Ls3b23bQSQC2ckZJ7xGOkdoOe3qjW3MxyzMx75JJOT37y0REdkTMymeH7NupqP8YH69P6yuSN0lp4G/LxFJ93vPANRVo9G+osQXPqDyFrFmw8gA7ySOq5Of0WZceqU3Pm+i4ymTiuIjFWdRXrvXn5MNPrdNrdLdoKtONI1YOqoBvawNaD51BceUkHGM/tE+kvE1vXljox5MeXh81ctrc251PTTxbxfZm4D2QfqSx/0nTDGqsPilt5tekKKdnmkBAQEBAQEBAQEBAQEBAQEBAQEBAtdHwC61BYoTae2WHviasfB5cleasdGTJxuHHaa2nq3DwtqfZD/5hL/oM3op/qXD+rizwxqVBYqoAGT5h2EieBzRG5gr4hgtblieqmExty40HiO9EFD2W2UfK1W/blPVA+CVB9hOVsNJneuqs0je0kcQ0NPn09Nt9h6r8TtNdX02L/en6tgdukry5LdLTqPZGrT3VXEOIXah+Zc7WN2yewHsoHRR9BgTrWlaRqsLRGmFenlkpC6WBs+FgYtpYGizTQIz1EQMFOIF/wAJ8U2VeWz71fqfOB9G9fznC+Ctusd3r8J4vmw/Lf5o/iy4n4mZsrUNg/eIBb8h2EUwRHc4nxW15mMUaj+KgdyxySST1JPUmd9PJmZmdyxAhDkqRj69R+Hb+kDGAgICAgICAgICAgICAgICAgICB6F4Ias01c3caxYQ+35tm7Lbfrgz3OCm08P8vfq+e4/ljifm7dHo3D6uFM2EXiBz07LjviOfio86otj4O2ullJ9pmiTTc6qvdtWv9o5O41k/1EvXPfJwtr279XH9NTFx0Y6dujxOeA+ocQNlaZgT6NPAn1aeBJWiBnyIGLUQNFungQb9PAr76sQNEBA5EC2FSoaLG+RqyGI/eO5WP5ZH6TTyRWaWntMM3NN4vWO8S5s0NgXYajaozssRsDaevVsEY+h7dYtitEcsxv3K5a2ne9T5wqXHWZmljAQEBAQEBAQEBAQEBAQEBAQEDvHgUBq9jHaOdgn2VgmT+XWez4dafhW15PC8TpE56784/wC3uHC9DxDTulFD1WaVdu2wivPLJDPn1z1bGM+kz2yYMkTa8TFvR3jFxOOYrjmJp6vP/tk1INmpZSGHkUEHI+WtT/MzRPy8Dqf86s1P9zxGZj/NQ8YM8Z74ogT9NVAtdPTAnV1wN9VRY4UZMtStrTqsK3tFY3KUOHP7p+p/oJqjgrzG9wzTxuOOmmm7SsvU4I+k55OGyY43MdF8fE48k6ieqM6TO0Il9MCs1NMCrtTEDCByBAvtPTdVp1bUaW86aw5rc1soLYJzW5GD0ye/v9ZpxZqxXkvG4/kz5cMzbnpOp/miXnTKPIdQ/wDCcKvXtkyLfCj6ZmSnxZn5oiPdAFLMGcKxVcbiASF3fLk+mfTMztDVAQEBAQEBAQEBAQEBAQEBAQEC44Jxv4cFdm8MQfmwQcY6TZwvFzg3Gt7YuL4OOI1O9TDs+k8Z1IjAG5Qe9fXBP4A7T+c3xx+D6pjq8y/hfET8sW6fdR8e8Tm9DUE2r06k9ehB7D8PczJxXHTmryxHRt4Pw2OHtz76uuTz3pt2nWBcaWuBaUpA3qCegBJ+kmImZ1CJmIjcpWkR0Ylq7CCpHQdeuPrNnD470tu1ZY+IyUvXUWhv0jBAK1S0DJ6sB/n1m7DPLEVissWb5pm02hnqW8rfgf5Trlj5J+zlinV4+7HU+H9VVXzrKLFTAO7ykAHsTtJwPqZ8tTi8N7ckW6vorY7VjeuipsWaVFdqq4FPq0gQ4F74N1VNOpGpuYKKUe1F2sTZeEIpQbRgecqSSQMKesDtR+0ajDn4XUKbgi241KYVE0tumUacGryY5u4Z3dRiBI/4qoK9i6Vk2vuVRYhQhG3admGzO9NtK5HpX6ZxA6n4j8W26ummhsjYq85yxZ9ReoKrZax6thMKAf4j6wOuQEBAQEBAQEBAQEBAQEBAQJvCeHNqLBUhQMQT5iQOnU9gZzyZIx15pduHwWz35K913/YfUfv6f/G/+yZv1+L3eh/o3Eesfn+zP+wWq/eo/wAT/wCyP1+L3R/o/Eesfn+yk4xwt9NZynKFsBvKSRg59wPaacWWuSvNVh4jh74L8l+6vnRwIEzSiBc6VYFikCz4Qo8zevYf1no8BSJ3aXncdeY1WEy60KCzEKB3JOB+s9GZiO7z4ibTqEBuJ0/97X/iE5/qMX/KF/gZf+MsUJ1B5FA51j+QBRnGemWI6KB7mZuL4/BixWmbQ78PwmW146ae4LUNgrbDDaEOR0Ixg5+hn5dN/wDcm8eu32EV6aeE66gJZZWOyO9Y/BWK/wBJ9zitzUiZ9IeRbvKs1Al1VPqxArTA4gIEmjRs4yMfmZeKTK0VmezcOE2H9z9T/pJ+HZb4VmY4Lb/B/i//ACRySn4Nle6EEg9COh/GUc5jTGEEBAQEBAQEBAQEBAQEC68HvjWVfUsv6o0z8VG8Nm7w22uKo+gdFpqho6LRohqmbcr7QcjaSMnofaY6VpGKtuTcvSy5Mk8Tek5eWI7NvEGQVP8A9WGnykBznyE9A3y+k5ZeXln/AGte6+GLTkj/ANjfXs+f/HFudZYPYIv/ALQ3/wBpv4KNYYeZ4pbfE29tfydfmp55Am6QwLrSwLBIE7htuCV9+onocBeImay8/jqTMRaHYPCOhrv4hWlqrYiVWXhWGVNqtWqllPfG9jg+uJg/8lzXx8PHLOty6eE0i15mXq/TtgfpPgeaZfRxDAys7XjSJxDWpTW1tjBVUZJPT8h7k+0vixWyWitYTa8VjcvDdVcXdrD0LMzn6FiTj/Ofc46clIr6Q8WZ3O0DUy6FNrIFY0DiAgX/AAEAvQhwQbK1I91LgEfoTNVPodaz0e9eJOE8P0moo068G+JF3QvUjEV+YL5sDHrnqR2nGJtMb2iLW9XSPtR4Bp9DqkTTZVXr5hQsW2NuI6EkkA+gPsZekzMdXbFaZjq8o4ofvn/Gcrd3DJ9UokqoQEBAQEBAQEBAQEBAQLHw/Zt1VJ/5ij8icf1nLPG8do9mnhJ1npPu+huB032aMDTagrYrtms2KF2ZJ6DaSCcjv0mDDF7Yvkt19HtcXbFTiZ+NTddd9LbiXPq0Fq6q1Xsdl2jeCQmUyOw9mMjJOSmC0ZbbmZZ8HwsnF0nBXVY9vu+Z/FNmdXcf4tv6AD+k3cNGsVfs8/j53xF591VO7IQJWlaBc6V4FlUYGTCB2j7LnxrzuPeh1XJ7turbA+uFJ/KeX4zzW4f93fhYiLvU9dpUtQ1WDcpxkZIzggjqCD3Any+PJbHbmr3elNYtGpdK1+goB1lXwVlK00GyvUG23a7lMjbk46E+5+U5x0z62PLkmMdviRMzPWuo6M1qxEzGta83nIZj8xZse5J/nPpYrWO0PP3M9xjJEHUtAptW8CvgICBdcAb76gf86r/5Fmyv0Lb6PpPx5/0zzqf+jNnL2tzd/J279w27t/mxjOdv85mry66ojTo326VULqKGQIL2RzftxkqNgqZ/r84BPcD6Tpi3p1xTLxTiB+8b8Zyv3lzv9Uo0qqQEBAQEBAQEBAQEBAQNuntKMrjupDD8QciRMbjUrVtNbRMeTuOj8ddRzacH96tv5Kf9Z51/D+u6We7j8b3GstNt2v8AtCJJ5dRJP7VjdT+IHU/rIp4dG93si/jMRGsVPy6Tq7zY7WNjLMXOO2ScnE9KtYrGoeJkvN7TafNpkqOTAzpbBgWmltgWtFsCWDA5UkEMpKkHIIJBBHYgjsZExExqRcVeLdeowNS5H8Sox/VlJP5zHPh3DTO+V1jPkjzROIcZ1N4xddZYvfb0C5/8K4E7YuFw4p3SsQi2W9u8oM7ubRdZArdVbAqNS8CPAQEDfReVxjII6gjuD7iaKZoiupFqviXU+uq1v/qLf90n4tPRMaRzxIZLHexPUknJJ9yScmJzV9F+dXWuWJY+vWZ5nbnM7YSAgICAgICAgICAgICAgICAgICAgIErT2wLTT3wJ9V0DetsDLfA4ayBqsugQr74FZqb4EBjA4gICAgICAgICAgICAgICAgICAgICAgICAgICAgcgwJNN8CbVqIEpdTAz+JgYtqYGi3UwIV2ogQ3fMDGAgICAgICAgICAgICAgIH/9k=" alt="Your Image" style="max-width:100%; height:auto; border-radius:15px; flex:1;">
+            <div class="text col-md-8 col-12" style="flex:2;">
+                <h2 style="color:white; margin:0.5rem 0;">
+                    Data Skills Academy's Full-Stack Web Development Program
+                </h2>
+                <p style="color:white;margin:0.5rem 0;">
+                    Become a remote software engineer, from anywhere. We're currently making changes to our Full-Stack Web Development Program, so new enrollments are paused.
+                </p>
+                <button style="padding:0.5rem 1rem; background-color:#ccc; color:#fff; border:none; border-radius:5px; cursor:not-allowed;" disabled>
+                    Learn More
+                </button>
+            </div>
+        </div>
+    </div>
+
+<style>
+    
+</style>
+
+
+    <div class="blog-card">
+    <div class="meta">
+      <div class="photo" style="background-image: url(https://storage.googleapis.com/chydlx/codepen/blog-cards/image-1.jpg)"></div>
+      <ul class="details">
+        <li class="author"><a href="#">John Doe</a></li>
+        <li class="date">Aug. 24, 2015</li>
+        <li class="tags">
+          <ul>
+            <li><a href="#">Learn</a></li>
+            <li><a href="#">Code</a></li>
+            <li><a href="#">HTML</a></li>
+            <li><a href="#">CSS</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+    <div class="description">
+      <h1>Learning to Code</h1>
+      <h2>Opening a door to the future</h2>
+      <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad eum dolorum architecto obcaecati enim dicta praesentium, quam nobis! Neque ad aliquam facilis numquam. Veritatis, sit.</p>
+      <p class="read-more">
+        <a href="#">Read More</a>
+      </p>
+    </div>
+  </div>
+  <div class="blog-card alt">
+    <div class="meta">
+      <div class="photo" style="background-image: url(https://storage.googleapis.com/chydlx/codepen/blog-cards/image-2.jpg)"></div>
+      <ul class="details">
+        <li class="author"><a href="#">Jane Doe</a></li>
+        <li class="date">July. 15, 2015</li>
+        <li class="tags">
+          <ul>
+            <li><a href="#">Learn</a></li>
+            <li><a href="#">Code</a></li>
+            <li><a href="#">JavaScript</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+    <div class="description">
+      <h1>Mastering the Language</h1>
+      <h2>Java is not the same as JavaScript</h2>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad eum dolorum architecto obcaecati enim dicta praesentium, quam nobis! Neque ad aliquam facilis numquam. Veritatis, sit.</p>
+      <p class="read-more">
+        <a href="#">Read More</a>
+      </p>
+    </div>
+  </div>
+
+
+
+
+
+<div class="d-flex" style="height: 100px;">
+  <div class="v"></div>
+</div>
+
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <h1 class="courses-title">Unlock Your Potential: Explore Our Courses</h1>
+                </div>
+            </div>
+        </div>
+
+
+<div class="my-card mt-4 shadow-lg border-0">
+    <div class="card-body">
+       <a href="{% url 'blogs:all_courses' %}"> <h5 class="card-title text-center display-4 mb-4">Courses</h5></a>
+        <ul class="list-group">
+            {% for course in courses %}
+            <a class="list-group-item list-group-item-action" href="{% url 'blogs:motivation' course.id %}" style="text-decoration: none;">
+                <li class="list-group-item">{{ course.title }}</li>
+            </a>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+
+
+        <section class='container-fluid home-annimation'>
+                <div class="row mt-4">
+                    <div class="col-md-6 mt-4" style="height:50%">
+                       <img src="{% static  'images/Avance-data-analysis.webp' %}" class="img-fluid" alt="Data-anaylist" style="max-height:350px; width:100%">
+                  </div>
+
+                 <div class="col-md-6 mt-4" style="height:50%">
+                     <img src="{% static  'images/data.jpg' %}" class="img-fluid" alt="Data-anaylist" style="max-height:350px; width:100%">
+                </div>
+                </div>
+        </section>
+
+<div class="d-flex" style="height: 200px;">
+    <div class="v"></div>
+  </div>
+
+  <div class="container-fluid mb-4">
+      <div class="row">
+          <div class="col" style='box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;'>
+                <h1 class="display-4" style='padding:10px;font-weight:bold;text-align:center;color: transparent;background-clip: text;background-image:linear-gradient(to right, #553c9a 45%, #ee4b2b)'>Stay up to date with our latest posts.</h1>
+          </div>
+      </div>
+  </div>
+
+
+
+<div class="container-fluid recent-posts m-2 ">
+    <div class="row"  style='margin:.5em'>
+        {% for post in page_obj|slice:'8' %}
+    <!-- Blog Post Card -->
+    <div class='col col-md-6' style=" background-color: #fff; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); overflow: hidden;">
+
+        <!-- Card Image -->
+        <div style="height: 200px; overflow: hidden;">
+            {% if post.thumbnail %}
+            <img src="{{post.thumbnail.url }}" class="img-fluid" alt="{{post.title}} image" style="width: 100%; height: 250px;">
+            {% endif %}
+        </div>
+
+        <!-- Card Content -->
+        <div style="padding: 20px;">
+            <!-- Title -->
+            <h2 style="margin: 0 0 10px 0; color: #333; font-size: 1.8em;">{{post.title}}</h2>
+
+            <!-- Meta Information -->
+            <div style="color: #777; font-size: 0.9em; margin-bottom: 20px;">
+                Posted on July 27, 2024 by <strong>{{post.user.profile.firstname}}</strong>
+            </div>
+
+            <!-- Snippet -->
+            <p style="color: #555; line-height: 1.6; margin: 0 0 20px 0;">
+                {{post.description}}...
+            </p>
+
+            <!-- Read More Button -->
+           <a href="{% url 'blogs:post-detail' post.id %}" class="btn btn-primary read-more-link m-2" data-post-id="{{ post.id }}" style="width:40%;">Read more</a>   </div>
+    </div>
+
+
+
+
+
+    <!--    <div class="col-12 col-md-6 mb-4">-->
+    <!--        <div class="card h-200" style="height: 500px; overflow: hidden;">-->
+    <!--            <div id="carousel{{ forloop.counter }}" class="carousel slide" data-bs-ride="carousel">-->
+    <!--                <div class="carousel-inner">-->
+    <!--                    <div class="carousel-item active">-->
+    <!--                        <div class="card-body" style="max-height:450px;">-->
+    <!--                            {% if post.thumbnail %}-->
+    <!--                            <img src="{{post.thumbnail.url }}" class="img-fluid" alt="Data Analyst" style="width: 100%; height: 250px;">-->
+    <!--                            {% endif %}-->
+    <!--                            <h5 class="card-title m-2">{{ post.title }}</h5>-->
+    <!--                            <p class="card-text">{{ post.body|safe }}</p>-->
+    <!--                        </div>-->
+    <!--                    </div>-->
+    <!--                    <div class="carousel-item" style="max-height:450px;">-->
+    <!--                        <div class="card-body">-->
+    <!--                            <p class="card-text">{{ post.body|safe }}</p>-->
+    <!--                        </div>-->
+    <!--                    </div>-->
+    <!--                </div>-->
+
+    <!--                <button class="carousel-control-prev" type="button" data-bs-target="#carousel{{ forloop.counter }}" data-bs-slide="prev">-->
+    <!--                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>-->
+    <!--                    <span class="visually-hidden">Previous</span>-->
+    <!--                </button>-->
+    <!--                <button class="carousel-control-next" type="button" data-bs-target="#carousel{{ forloop.counter }}" data-bs-slide="next">-->
+    <!--                    <span class="carousel-control-next-icon" aria-hidden="true"></span>-->
+    <!--                    <span class="visually-hidden">Next</span>-->
+    <!--                </button>-->
+    <!--            </div>-->
+
+    <!--            <a href="{% url 'blogs:post-detail' post.id %}" class="btn btn-primary read-more-link m-2" data-post-id="{{ post.id }}" style="width:40%;">Read more</a>-->
+    <!--        </div>-->
+    <!--    </div>-->
+    <!--    {% endfor %}-->
+    <!--</div>-->
+</div>
+</div>
+
+
+
+<div class="d-flex" style="height: 200px;">
+    <div class="v"></div>
+  </div>
+
+  <div class="container" >
+      <div class="row">
+          <div class="col">
+                <h1 class="posts-title">Our Proffectional Services</h1>
+          </div>
+      </div>
+  </div>
+<hr>
+
+   <div class='container m-4 home-annimation'>
+        <section id="data-analysis">
+            <h2>Data Analysis</h2>
+            <p>Unlock insights and drive decision-making with our expert data analysis services.</p>
+        </section>
+
+        <section id="software-development">
+            <h2>Software Development</h2>
+            <p>We develop custom software solutions tailored to your business needs.</p>
+        </section>
+
+        <section id="business-consulting">
+            <h2>Business Consulting</h2>
+            <p>Receive expert advice and strategies to optimize your business operations.</p>
+        </section>
+
+        <section id="website-development">
+            <h2>Website Development</h2>
+            <p>Create stunning, responsive websites that engage and convert visitors.</p>
+        </section>
+
+        <section id="web-scripting">
+            <h2>Web Scripting</h2>
+            <p>Automate tasks and enhance your web applications with our web scripting services.</p>
+        </section>
+
+        <section id="seo">
+            <h2>SEO</h2>
+            <p>Boost your online presence and improve your search engine rankings with our SEO services.</p>
+        </section>
+
+
+
+        <section id="seo">
+            <h2>Free Courses for Everyone</h2>
+            <p>It is not too late to learn new proffectional skill from dedicated techers. You can start learning our <a href="{% url 'blogs:all_courses' %}"> courses</a> for free today.</p>
+        </section>
+    </div>
+
+
+
+
+<form method="GET" action="{% url 'blogs:search' %}">
+    <input type="text" name="query" placeholder="Search..." value="{{ query }}">
+    <button type="submit">Search</button>
+</form>
+
+    {% include 'blogs/multi_model_search.html' %}
+
+        <!-- Pagination -->
+        <nav>
+            <ul class="pagination justify-content-center">
+                {% if page_obj.has_previous %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+                </li>
+                {% endif %}
+                {% for num in page_obj.paginator.page_range %}
+                <li class="page-item {% if page_obj.number == num %}active{% endif %}">
+                    <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+                </li>
+                {% endfor %}
+                {% if page_obj.has_next %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a>
+                </li>
+                {% endif %}
+            </ul>
+        </nav>
+    </div>
+</main>
+
+
+
+
+<div class="row mb-4 mt-5 btn-primary p-3 " style="justify-content:center ">
+        <div class="col-md-6 ">
+            <h1 style="font-weight:bold">Empowering professionals in mastering digital analytics</h1>
+            <p>Welcome to Master the Digital Frontier, your go-to resource for all things data analytics. Our blog offers valuable insights, strategies, and practical advice to navigate the evolving landscape of data science. </p>
+            <a href="{% url 'blogs:post' %}" style="border-radius:15px;" class="btn btn-light mb-5">Learn More
+            </a>
+        </div>
+    <aside class="col-md-3 mb-4" >
+            <div class="card blog-left-side">
+                <div class="card-body ">
+                    <h1 class="card-title" style="color:black">Topics</h1>
+                    <div id="topicsCarousel" class="carousel slide" data-ride="carousel" data-interval="3000">
+                        <div class="carousel-inner">
+                            {% for top in topics %}
+
+                            {% if top.image %}
+                                <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                                    <p style="color:black">{{ top.title }}</p>
+                                    <a href="{% url 'blogs:topics' top.id %}"><img  src="{{ top.image.url }}" alt="{{top.tile}}" class="topic-picture" style="width: 100%; height:200px" ></a>
+                                    <a href="{% url 'blogs:topics' top.id %}" class="btn btn-primary m-2">Learn Now </a>
+                                </div>
+                            {% elif top.image == 'None' %}
+                            {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+</div>
+
+
+<div class="container " >
+    <!-- Contact Form -->
+    <div class="row mb-4 mt-5" style="justify-content:center">
+        <div class="col-md-6">
+            <h1 style="font-weight:bold">Contact Us for Data Analytics Solutions</h1>
+            <p>Have a question about your data or need assistance with your data analytics journey? Feel free to reach out to us. We are here you.
+            </p>
+            <h4>Get in Touch</h4>
+            <p>+49-017-669-258-588</p>
+            <p>+46-206-257-091</p>
+            <h4>Email</h4>
+            <p>info@dataskillacademy.com</p>
+
+
+        </div>
+
+        <div class="col-md-6">
+            <h2>Contact Us</h2>
+            <form method="post" action="" style="">
+                {% csrf_token %}
+                <label for="name">
+                 {% render_field  contact_form.name placeholder='Enter name' class+='form-control' %}
+                </label>
+
+                 {% render_field  contact_form.email placeholder='Enter Email' class+='form-control' %}
+                 {% render_field  contact_form.message placeholder='Comment' class+='form-control' %}
+
+                <button type="submit" name="contact_submit" class="btn btn-primary mt-2">Submit</button>
+            </form>
+        </div>
+
+
+    <!-- Comment Form -->
+
+    </div>
+
+    <!-- Subscribe Form -->
+
+</div>
+
+
+
+
+
+
+<section class="section-2-container">
+    <div class="section2">
+        <div class="left-content">
+            <div class="content">
+                <div class="pill">
+                    <span class="pill-container">
+                        <span>
+                            <img src="{% static 'images/images/edit-brightness.svg' %}" alt="Update Icon" />
+                        </span>
+                        <span>
+                            Version 3.1 launched. <span class="underline">Discover more</span>
+                        </span>
+                    </span>
+                </div>
+                <h1>Real-Time Analytics for Your Data</h1>
+                <p>
+                    Unlock the power of big data analytics and cloud services to transform your organization into a data-driven powerhouse with Data Skills Academy.
+                </p>
+                <div class="buttons">
+                    <button class="fill btn" onclick="location.href=''">Start Free Trial</button>
+                    <button class="outline btn" onclick="location.href=''">Discover More</button>
+                </div>
+            </div>
+        </div>
+        <div class="right-content">
+            <div>
+                <img src="{% static 'images/images/image 1.png' %}" alt="Data Analytics Illustration" />
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Section 3 -->
+<section class="container">
+    <div class="section3">
+        <div class="section-3-container">
+            <div class="top-content">
+                <span class="pill">
+                    <span class="pill-container">
+                        <span>
+                            <img src="{% static 'images/images/Icon awesome-eye.png' %}" alt="Insight Icon" />
+                        </span>
+                        <span>Why Choose Data Skills Academy</span>
+                    </span>
+                </span>
+                <h2>Gain Actionable Insights from Big Data in Three Simple Steps</h2>
+                <p>
+                    Learn how to efficiently harness and analyze big data through a straightforward, three-step process to uncover valuable insights for your business.
+                </p>
+            </div>
+            <div class="bottom-content">
+                <div>
+                    <span>
+                        <img src="{% static 'images/images/chart-bar-33.svg' %}" alt="Business Insights Icon" />
+                    </span>
+                    <h3>Insightful Business Data</h3>
+                    <p>
+                        Gather data that has been processed and cleaned, ready for analysis to reveal significant business insights.
+                    </p>
+                </div>
+                <div>
+                    <span>
+                        <img src="{% static 'images/images/newsletter-dev.svg' %}" alt="Algorithms Icon" />
+                    </span>
+                    <h3>Advanced Algorithms</h3>
+                    <p>
+                        Utilize sophisticated algorithms along with quality rules to transform and enhance your data for clearer insights.
+                    </p>
+                </div>
+                <div>
+                    <span>
+                        <img src="{% static 'images/images/timeline.svg' %}" alt="Real-time Data Icon" />
+                    </span>
+                    <h3>Real-time Data Processing</h3>
+                    <p>
+                        Capture data from various sources in real-time and store it in its raw format within a data lake for ongoing analysis.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Section 4 -->
+<div class="section4">
+    <div class="section-4-container container">
+        <div class="left-content">
+            <span><img src="{% static 'images/images/Group 21.svg' %}" alt="Product Teams Icon" /></span>
+        </div>
+        <div class="right-content">
+            <div class="pill-outer-container">
+                <div class="pill">
+                    <span class="pill-container">
+                        <span>
+                            <img src="{% static 'images/images/Group 11.svg' %}" alt="Product Teams Badge" />
+                        </span>
+                        <span>For Product Teams</span>
+                    </span>
+                </div>
+            </div>
+            <h1>Launch with the Best Technology Stack</h1>
+            <p>
+                A unified platform that consolidates countless data sources using Big Data ELT (Extract, Load & Transform) to ensure no data is overlooked.
+            </p>
+        </div>
+    </div>
+</div>
+<!-- Section 5 -->
+<div class="section4">
+    <div class="section-4-container container">
+        <div class="right-content">
+            <div class="pill-outer-container">
+                <div class="pill">
+                    <span class="pill-container">
+                        <span>
+                            <img src="{% static 'images/images/Group 28.svg' %}" alt="Engineering Teams Icon" />
+                        </span>
+                        <span>For Engineering Teams</span>
+                    </span>
+                </div>
+            </div>
+            <h1>Create Data-Driven Pipelines in Minutes</h1>
+            <p>
+                Enjoy maintenance-free data pipelines with quick setup and straightforward deployment, all powered by a modern and scalable platform.
+            </p>
+        </div>
+        <div class="left-content">
+            <span>
+                <img class="right-img" src="{% static 'images/images/image 6.png' %}" alt="Engineering Illustration" />
+            </span>
+        </div>
+    </div>
+</div>
+<!-- Section 6 -->
+<div class="section6">
+    <div class="section-6-container container">
+        <h3>
+            "What I appreciate about Data Skills Academy is the seamless collaboration it facilitates, even with a large team involved."
+        </h3>
+        <span><img src="{% static 'images/images/Profigle.png' %}" alt="Profile Picture" /></span>
+        <p>Rowan Sullivan</p>
+        <p>CTO @ Data Skills Academy</p>
+        <div class="divider"></div>
+        <div class="logo-container">
+            <img src="{% static 'images/images/Logo.png' %}" alt="Partner Logo" />
+            <img src="{% static 'images/images/Logo.png' %}" alt="Partner Logo" />
+            <img src="{% static 'images/images/Logo.png' %}" alt="Partner Logo" />
+            <img src="{% static 'images/images/Logo.png' %}" alt="Partner Logo" />
+        </div>
+    </div>
+</div>
+<!-- Section 7 -->
+<div class="section7">
+    <div class="section-7-container">
+        <div class="left-content">
+            <h2>
+                Discover why leading global companies trust Data Skills Academy to become truly data-driven
+            </h2>
+            <div class="section-divider">
+                <div><div class="left-divider"></div></div>
+                <div><span>Trusted by</span></div>
+                <div><div class="right-divider"></div></div>
+            </div>
+            <div class="section-7-logo-container">
+                <img src="{% static 'images/images/Logo.png' %}" alt="Company Logo" />
+                <img src="{% static 'images/images/Logo.png' %}" alt="Company Logo" />
+            </div>
+            <div class="section-7-logo-container">
+                <img src="{% static 'images/images/Logo.png' %}" alt="Company Logo" />
+                <img src="{% static 'images/images/Logo.png' %}" alt="Company Logo" />
+            </div>
+        </div>
+        <div class="right-content">
+            <div class="outer-container">
+                <div class="inner-container">
+                    <h2>Contact us today</h2>
+                    {% if not request.user.is_authenticated %}
+                    <button onclick="location.href='{% url 'logusers:register' %}'">Register</button>
+                    {% endif %}
+                    {% render_field  contact_form.name placeholder='Enter name' class+='form-control' %}
+                    {% render_field  contact_form.email placeholder='Enter Email' class+='form-control' %}
+                    {% render_field  contact_form.message placeholder='Your message' class+='form-control' %}
+                    <button type="submit" name="contact_submit" class="btn btn-primary mt-2">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+    .projcard-container {
+	margin: 50px 0;
+}
+
+/* Actual Code: */
+.projcard-container,
+.projcard-container * {
+	box-sizing: border-box;
+}
+.projcard-container {
+	margin-left: auto;
+	margin-right: auto;
+
+}
+.projcard {
+	position: relative;
+	width: 100%;
+	height: 300px;
+	margin-bottom: 40px;
+	border-radius: 10px;
+	background-color: #fff;
+	border: 2px solid #ddd;
+	font-size: 18px;
+	overflow: hidden;
+	cursor: pointer;
+	box-shadow: 0 4px 21px -12px rgba(0, 0, 0, .66);
+	transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+.projcard:hover {
+	box-shadow: 0 34px 32px -33px rgba(0, 0, 0, .18);
+	transform: translate(0px, -3px);
+}
+.projcard::before {
+	content: "";
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	background-image: linear-gradient(-70deg, #424242, transparent 50%);
+	opacity: 0.07;
+}
+.projcard:nth-child(2n)::before {
+	background-image: linear-gradient(-250deg, #424242, transparent 50%);
+}
+.projcard-innerbox {
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+}
+.projcard-img {
+	position: absolute;
+	height: 300px;
+	width: 300px;
+	top: 0;
+	left: 0;
+	transition: transform 0.2s ease;
+}
+.projcard:nth-child(2n) .projcard-img {
+	left: initial;
+	right: 0;
+}
+.projcard:hover .projcard-img {
+	transform: scale(1.05) rotate(1deg);
+}
+.projcard:hover .projcard-bar {
+	width: 70px;
+}
+.projcard-textbox {
+	position: absolute;
+	top: 7%;
+	bottom: 7%;
+	left: 430px;
+	width: calc(100% - 470px);
+	font-size: 17px;
+}
+.projcard:nth-child(2n) .projcard-textbox {
+	left: initial;
+	right: 430px;
+}
+.projcard-textbox::before,
+.projcard-textbox::after {
+	content: "";
+	position: absolute;
+	display: block;
+	background: #ff0000bb;
+	background: #fff;
+	top: -20%;
+	left: -55px;
+	height: 140%;
+	width: 60px;
+	transform: rotate(8deg);
+}
+.projcard:nth-child(2n) .projcard-textbox::before {
+	display: none;
+}
+.projcard-textbox::after {
+	display: none;
+	left: initial;
+	right: -55px;
+}
+.projcard:nth-child(2n) .projcard-textbox::after {
+	display: block;
+}
+.projcard-textbox * {
+	position: relative;
+}
+.projcard-title {
+	font-family: 'Voces', 'Open Sans', arial, sans-serif;
+	font-size: 24px;
+}
+.projcard-subtitle {
+	font-family: 'Voces', 'Open Sans', arial, sans-serif;
+	color: #888;
+}
+.projcard-bar {
+	left: -2px;
+	width: 50px;
+	height: 5px;
+	margin: 10px 0;
+	border-radius: 5px;
+	background-color: #424242;
+	transition: width 0.2s ease;
+}
+.projcard-blue .projcard-bar { background-color: #0088FF; }
+.projcard-blue::before { background-image: linear-gradient(-70deg, #0088FF, transparent 50%); }
+.projcard-blue:nth-child(2n)::before { background-image: linear-gradient(-250deg, #0088FF, transparent 50%); }
+.projcard-description {
+	z-index: 10;
+	font-size: 15px;
+	color: #424242;
+	height: 125px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+.projcard-tagbox {
+	position: absolute;
+	bottom: 3%;
+	font-size: 14px;
+	cursor: default;
+	user-select: none;
+	pointer-events: none;
+}
+.projcard-tag {
+	display: inline-block;
+	background: #E0E0E0;
+	color: #777;
+	border-radius: 3px 0 0 3px;
+	line-height: 26px;
+	padding: 0 10px 0 23px;
+	position: relative;
+	margin-right: 20px;
+	cursor: default;
+	user-select: none;
+	transition: color 0.2s;
+}
+.projcard-tag::before {
+	content: '';
+	position: absolute;
+	background: #fff;
+	border-radius: 10px;
+	box-shadow: inset 0 1px rgba(0, 0, 0, 0.25);
+	height: 6px;
+	left: 10px;
+	width: 6px;
+	top: 10px;
+}
+.projcard-tag::after {
+	content: '';
+	position: absolute;
+	border-bottom: 13px solid transparent;
+	border-left: 10px solid #E0E0E0;
+	border-top: 13px solid transparent;
+	right: -10px;
+	top: 0;
+}
+</style>
+<div class="row">
+<div class="col projcard-container" >
+	<div class="projcard projcard-blue">
+		<div class="projcard-innerbox">
+			<img class="projcard-img" src="https://picsum.photos/800/600?image=1041" />
+			<div class="projcard-textbox">
+				<div class="projcard-title">Card Title</div>
+				<div class="projcard-subtitle">This explains the card in more detail</div>
+				<div class="projcard-bar"></div>
+				<div class="projcard-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</div>
+				<div class="projcard-tagbox">
+					<a class="projcard-tag">Read</a>
+
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="projcard projcard-blue">
+		<div class="projcard-innerbox">
+			<img class="projcard-img" src="https://picsum.photos/800/600?image=1041" />
+			<div class="projcard-textbox">
+				<div class="projcard-title">Card Title</div>
+				<div class="projcard-subtitle">This explains the card in more detail</div>
+				<div class="projcard-bar"></div>
+				<div class="projcard-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</div>
+				<div class="projcard-tagbox">
+					<a class="projcard-tag">Read</a>
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+</div>
+</div>
+
+
+<style>
+    .row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px; /* Adds space between cards */
+    }
+
+    .col {
+      flex: 1 1 calc(50% - 20px); /* Two cards per row */
+      max-width: calc(50% - 20px); /* Ensures max width for larger screens */
+      box-sizing: border-box; /* Includes padding and border in width */
+      margin-bottom: 20px; /* Adds space between rows on smaller screens */
+    }
+
+    @media (max-width: 768px) { /* Adjusts for smaller screens */
+      .col {
+        flex: 1 1 100%;
+        max-width: 100%;
+      }
+    }
+
+    .projcard {
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+
+  </style>
+
+
+
+ <div class="row">
+    <div class="col">
+      <div class="projcard projcard-blue">
+        <div class="projcard-innerbox">
+          <img class="projcard-img" src="https://picsum.photos/800/600?image=1041" alt="Card Image" />
+          <div class="projcard-textbox">
+            <div class="projcard-title">Card Title</div>
+            <div class="projcard-subtitle">This explains the card in more detail</div>
+            <div class="projcard-bar"></div>
+            <div class="projcard-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</div>
+            <div class="projcard-tagbox">
+              <a class="projcard-tag" href="#">Read</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="projcard projcard-blue">
+        <div class="projcard-innerbox">
+          <img class="projcard-img" src="https://picsum.photos/800/600?image=1041" alt="Card Image" />
+          <div class="projcard-textbox">
+            <div class="projcard-title">Card Title</div>
+            <div class="projcard-subtitle">This explains the card in more detail</div>
+            <div class="projcard-bar"></div>
+            <div class="projcard-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</div>
+            <div class="projcard-tagbox">
+              <a class="projcard-tag" href="#">Read</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var carousels = document.querySelectorAll('.carousel');
+
+        carousels.forEach(function (carousel) {
+            var width = window.innerWidth;
+
+            if (width < 768) {
+                // Disable automatic slide for small devices
+                carousel.removeAttribute('data-bs-ride');
+            }
+        });
+    });
+
+    window.addEventListener('resize', function () {
+        var carousels = document.querySelectorAll('.carousel');
+
+        carousels.forEach(function (carousel) {
+            var width = window.innerWidth;
+
+            if (width < 768) {
+                // Disable automatic slide for small devices
+                carousel.removeAttribute('data-bs-ride');
+            } else {
+                // Enable automatic slide for larger devices
+                carousel.setAttribute('data-bs-ride', 'carousel');
+            }
+        });
+    });
+</script>
+
+
+
+
+
+
+
+
+
+
+<!--<style>-->
+<!--    @media and screen(max-width:700px){-->
+<!--    .editor-row{-->
+<!--      display:block;-->
+<!--    }-->
+<!--    }-->
+<!--</style>-->
+
+<!--<style>-->
+<!--        .editor-container{-->
+<!--            height: 50vh;-->
+<!--            display:grid;-->
+<!--            width:100vw;-->
+<!--            background-color: hsl(220, 68%, 54%);-->
+<!--            grid-gap:5px;-->
+<!--            grid-template-areas:-->
+<!--            'title title title title title title title'-->
+<!--            'output output  output  output output'-->
+<!--            'output output  output  output output'-->
+<!--            'html  html css css js js'-->
+<!--            'html  html css css js js'-->
+
+<!--        }-->
+
+<!--        .htmlCode{-->
+<!--            grid-area: html;-->
+<!--        }-->
+
+<!--        .cssCode{-->
+<!--            grid-area:css;-->
+<!--        }-->
+
+<!--        .javascriptCode{-->
+<!--            grid-area:js;-->
+
+<!--        }-->
+
+<!--        .editor-title{-->
+<!--            grid-area:title;-->
+<!--            text-align: center;-->
+<!--            color:white;-->
+<!--        }-->
+
+<!--         .ouput{-->
+<!--            grid-area: output;-->
+<!--            background-color: white;-->
+<!--            margin-left:1rem;-->
+<!--            width:95%;-->
+
+
+<!--        }-->
+<!--        .inner-editor-container{-->
+<!--            display:flex;-->
+<!--            flex-wrap:wrap;-->
+<!--        }-->
+
+<!--        .htmlCode,.cssCode,.javascriptCode{-->
+<!--            box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;-->
+
+<!--        }-->
+
+<!--    </style>-->
+
+
+
+<style>
+
+    .main-editor{
+     display:flex;
+     height:100vh;
+     width:100vw;
+     background-color: #3a6fd9;
+     flex-wrap:wrap;
+
+
+    }
+ .output{
+    width:45%;
+    height:100%;
+    margin-right:5px;
+    margin-bottom:5px;
+    }
+    .editor-boxes-container{
+    justify-content:center;
+    align-item:center;
+    width:50%;
+    height:100vh%;
+    overflow:auto;
+    }
+
+    .editor{
+    height:30%;
+    margin-top:5px;
+    }
+   .box{
+    height:100%;
+    }
+
+    h3{
+     color:white;
+     z-index:100;
+     font-size:16px;
+    }
+  textarea{
+     width:100%;
+     height:100%;
+  }
+    @media screen and (max-width: 730px) {
+    .main-editor {
+        display:block;
+        justify-content: center; /* Centers items horizontally */
+        align-items: center; /* Centers items vertically */
+    }
+    .editor{
+    height:40%;
+    margin-top:5px;
+    width:100vw;
+    }
+
+    textarea{
+     width:100vw;
+     height:100%;
+    }
+
+  .editor-boxes-container {
+    width:100vw;
+    display: flex;
+    height: 50vh;
+    overflow-x: auto;
+}
+     .output{
+    width:100%;
+    margin-right:10px;
+    height:100vh;
+
+    }
+    .box{
+      width:100vw;
+      height:100%;
+    }
+
+}
+.output-content{
+height:100%;
+}
+
+     .box{
+      height:30Vh;
+    }
+</style>
+
+
+
+
+    <!-- Output Section -->
+<div class = 'main-editor' >
+
+     <div class="editor-boxes-container">
+    <!-- Editor Section --><!-- HTML Editor -->
+        <div class="htmlCode editor" >
+            <h3 class="text-center">HTML</h3>
+            <div id="html-editor" class="box" style="border: 1px solid #ddd;"></div>
+            <textarea id="html-code" name="html_code" style="display: none;">{{ form.html_code.value }}</textarea>
+        </div>
+
+        <!-- CSS Editor -->
+        <div class="cssCode editor" >
+            <h3 class="text-center">CSS</h3>
+            <div id="css-editor" class="box" style="border: 1px solid #ddd;"></div>
+            <textarea id="css-code" name="css_code" style="display: none;">{{ form.css_code.value }}</textarea>
+        </div>
+
+            <!-- JavaScript Editor -->
+            <div class="javascriptCode editor" >
+                <h3 class="text-center">JavaScript</h3>
+                 <div id="js-editor" class="box" style="border: 1px solid #ddd;"></div>
+                <textarea id="js-code" name="js_code" style="display: none;">{{ form.js_code.value }}</textarea>
+            </div>
+        </div>
+
+          <div class="output" style="background-color: hsl(220, 68%, 54%); padding: 10px; box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;">
+                <h3 class="editor-title" style="text-align:center;color:white">Powered by Data Skill Academy</h3>
+                <h2 class="text-center" style="color:white;">Output</h2>
+                <div class="output-content" style=" padding:10px;margin-left:5px;margin-right:5px;margin-bottom:.5rem; background:white; height:80%">
+                <!-- Dynamic output will be shown here -->
+                <iframe id="result-frame"  sandbox="allow-scripts allow-same-origin" style="width: 100%; height: 100%; border: none;"></iframe>
+            </div>
+    </div>
+</div>
+
+
+
+
+    <!-- Result Column -->
+    <div class="col-12">
+        {% if result %}
+            <h2 class="text-primary">Result:</h2>
+            <iframe id="result-frame" style="width: 100%; height: 400px; border: 1px solid #ddd;"></iframe>
+        {% endif %}
+
+        {% if error %}
+            <h2 class="text-danger">Error:</h2>
+            <pre style="color: white; background-color: #333; padding: 10px; border-radius: 5px;">{{ error }}</pre>
+        {% endif %}
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+    // Initializing the editors using Monaco Editor
+    require.config({ paths: { 'vs': 'https://cdn.jsdelivr.net/npm/monaco-editor@latest/min/vs' }});
+    require(['vs/editor/editor.main'], function() {
+        var htmlEditor = monaco.editor.create(document.getElementById('html-editor'), {
+            value: document.getElementById('html-code').value || '{{cleancode|safe}}\n',
+            language: 'html',
+            theme: 'vs-dark'
+        });
+
+        var cssEditor = monaco.editor.create(document.getElementById('css-editor'), {
+            value: document.getElementById('css-code').value || '/* Write your CSS here */',
+            language: 'css',
+            theme: 'vs-dark'
+        });
+
+        var jsEditor = monaco.editor.create(document.getElementById('js-editor'), {
+            value: document.getElementById('js-code').value || '// Write your JavaScript here',
+            language: 'javascript',
+            theme: 'vs-dark'
+        });
+
+        function updateOutput() {
+            var htmlCode = htmlEditor.getValue();
+            var cssCode = '<style>' + cssEditor.getValue() + '</style>';
+            var jsCode = '<script>' + jsEditor.getValue() + '<\/script>';
+
+            var combinedCode = htmlCode + cssCode + jsCode;
+
+            var resultFrame = document.getElementById('result-frame').contentWindow.document;
+            resultFrame.open();
+            resultFrame.write(combinedCode);
+            resultFrame.close();
+        }
+
+        // Set up the event listeners for real-time updates
+        htmlEditor.onDidChangeModelContent(updateOutput);
+        cssEditor.onDidChangeModelContent(updateOutput);
+        jsEditor.onDidChangeModelContent(updateOutput);
+
+        // Initial update
+        updateOutput();
+    });
+</script>
+
+
+
+
+
+<div class="" aria-hidden="false">
+    <label class="mwRatingFeedback-Label" id="mw_rating_feedback_1">How useful was this information?</label>
+    <mw-rating aria-labelledby="mw_rating_feedback_1" class="mwRatingFeedback-Value" name="mw_rating_feedback_1__rating" value="" role="radiogroup" aria-valuenow="" aria-disabled="false" aria-readonly="false">
+        <div class="mwRatingLayout">
+            <div class="mwRatingContainer ">
+                <input type="radio" class="mwRatingInput" name="mw_rating_feedback_1__rating" id="mw_rating_feedback_1__rating_0" value="">
+                <label class="mwRatingLabel" tabindex="-1" for="mw_rating_feedback_1__rating_0">
+                    <span>Unrated</span>
+                </label>
+                <input type="radio" class="mwRatingInput" name="mw_rating_feedback_1__rating" id="mw_rating_feedback_1__rating_1" value="1">
+                <label class="mwRatingLabel" tabindex="-1" for="mw_rating_feedback_1__rating_1">
+                    <svg aria-hidden="true" focusable="false"><use href="#mw_rating_staricon"></use></svg><span>1 star</span>
+                </label>
+                <input type="radio" class="mwRatingInput" name="mw_rating_feedback_1__rating" id="mw_rating_feedback_1__rating_2" value="2">
+                <label class="mwRatingLabel" tabindex="-1" for="mw_rating_feedback_1__rating_2">
+                    <svg aria-hidden="true" focusable="false"><use href="#mw_rating_staricon"></use></svg><span>2 stars</span>
+                </label>
+                <input type="radio" class="mwRatingInput" name="mw_rating_feedback_1__rating" id="mw_rating_feedback_1__rating_3" value="3">
+                <label class="mwRatingLabel" tabindex="-1" for="mw_rating_feedback_1__rating_3">
+                    <svg aria-hidden="true" focusable="false"><use href="#mw_rating_staricon"></use></svg><span>3 stars</span>
+                </label>
+                <input type="radio" class="mwRatingInput" name="mw_rating_feedback_1__rating" id="mw_rating_feedback_1__rating_4" value="4">
+                <label class="mwRatingLabel" tabindex="-1" for="mw_rating_feedback_1__rating_4">
+                    <svg aria-hidden="true" focusable="false"><use href="#mw_rating_staricon"></use></svg><span>4 stars</span>
+                </label>
+                <input type="radio" class="mwRatingInput" name="mw_rating_feedback_1__rating" id="mw_rating_feedback_1__rating_5" value="5">
+                <label class="mwRatingLabel" tabindex="-1" for="mw_rating_feedback_1__rating_5">
+                    <svg aria-hidden="true" focusable="false"><use href="#mw_rating_staricon"></use></svg><span>5 stars</span>
+                </label>
+            </div>
+        </div>
+    </mw-rating>
+</div>
+
+{% endblock %}

@@ -1,0 +1,59 @@
+
+
+<!--<nav class="navbar navbar-light bg-light">-->
+<!--  <form class="form-inline">-->
+<!--    <input class="form-control mr-sm-2 w-100" type="search" placeholder="Search" aria-label="Search">-->
+<!--    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>-->
+<!--  </form>-->
+<!--</nav>-->
+
+
+ <div style="max-width: 1200px; margin: 0 auto; padding: 20px;">
+        <!-- Search Form -->
+        <form method="GET" action="{% url 'blogs:search' %}" style="margin-bottom: 40px; text-align: center;">
+            <input type="text" name="query" placeholder="Search..." value="{{ query }}" style="width: 60%; padding: 10px; border-radius: 4px; border: 1px solid #ccc; font-size: 16px;">
+            <button type="submit" style="padding: 10px 20px; border: none; border-radius: 4px; background-color: #007bff; color: #fff; font-size: 16px; cursor: pointer;">Search</button>
+        </form>
+       {% if query %}
+        <h1 style="color: #333; text-align: center; margin-bottom: 40px;">Search Results for "{{ query }}"</h1>
+
+        <!-- Posts Section -->
+        <div>
+            <h2 class="section-title" style="color: #555; border-bottom: 2px solid #ddd; padding-bottom: 10px; margin-bottom: 20px; font-size: 24px;">Posts</h2>
+            <div class="item-list" style="display: flex; flex-wrap: wrap; gap: 20px;">
+                {% for post in posts %}
+                   <a href = "{% url 'blogs:post-detail' post.slug %}">{{post}}</a>
+                {% empty %}
+                    <p style="color: #999; font-size: 16px;">No posts found.</p>
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- Course Topics Section -->
+        <div>
+            <h2 class="section-title" style="color: #555; border-bottom: 2px solid #ddd; padding-bottom: 10px; margin-bottom: 20px; font-size: 24px;">Course Topics</h2>
+            <div class="item-list" style="display: flex; flex-wrap: wrap; gap: 20px;">
+                {% for topic in course_topics %}
+                  <a href = "{% url 'blogs:topics' topic.id %}">{{topic}}</a>
+                {% empty %}
+                    <p style="color: #999; font-size: 16px;">No course topics found.</p>
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- Courses Section -->
+        <div>
+            <h2 class="section-title" style="color: #555; border-bottom: 2px solid #ddd; padding-bottom: 10px; margin-bottom: 20px; font-size: 24px;">Courses</h2>
+            <div class="item-list" style="display: flex; flex-wrap: wrap; gap: 20px;">
+                {% for course in courses %}
+                   <a href = "{% url 'blogs:all_courses' %}">{{course}}</a>
+                {% empty %}
+                    <p style="color: #999; font-size: 16px;">No courses found.</p>
+                {% endfor %}
+            </div>
+        </div>
+
+    </div>
+
+{% endif %}
+

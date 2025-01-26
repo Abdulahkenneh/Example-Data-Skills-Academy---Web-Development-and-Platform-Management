@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load highlight %}
+    {% load static %}
+    {% load widget_tweaks %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <!-- SEO Meta Tags -->
+    <title>Data Analysis and Programming - Abdulah Mamadee Kenneh</title>
+    <meta name="description" content="Learn about data analysis and programming from Abdulah Mamadee Kenneh, CEO and author. Get insights, tutorials, and more on data analysis and programming.">
+    <meta name="keywords" content="data analysis, programming, tutorials,python,javascript,How to make money,data science, How to , Abdulah Mamadee Kenneh, CEO, author">
+    <meta name="author" content="Abdulah Mamadee Kenneh">
+
+    <!-- Open Graph Meta Tags (for social media) -->
+    <meta property="og:title" content="{% block og-title %}Mastering Data Analysis and Programming {% endblock %}">
+    <meta property="og:description" content="Learn about data analysis and programming from {% block author %}  {% endblock %}Abdulah Mamadee Kenneh, CEO and author. Get insights, tutorials, and more on data analysis and programming.">
+    <meta property="og:image" content="{% block oj-image %}https://{{ request.META.HTTP_HOST }}{% static 'images/Avance-data-analysis.webp' %}{% endblock %}">
+    <meta property="og:url" content="https://{{ request.META.HTTP_HOST }}{{ request.path }}">
+    <meta property="og:type"content="website">
+    <meta property="og:site_name" content="Mastering Data Analysis and Programming">
+
+
+    <title>{% block title %}{% endblock %} Mastering Data Analylitic</title>
+    
+    <link rel='icon' href='https://storage.cloud.google.com/data-analytic-bucket/favicon_io/android-chrome-192x192.png',sizes='192x192'>
+    <link rel='icon' href='https://storage.cloud.google.com/data-analytic-bucket/favicon_io/android-chrome-192x192.png',sizes='192x192'>
+    <link rel='icon' href='https://storage.cloud.google.com/data-analytic-bucket/favicon_io/favicon-16x16.png',sizes='16x16'>
+    <link rel='icon' href='https://storage.cloud.google.com/data-analytic-bucket/favicon_io/favicon.ico',sizes='32x32'>
+    
+    
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+    <link rel="stylesheet" href="{% static 'css/blogpost.css' %}">
+     <!-- Use only one version of Bootstrap -->
+<!--    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> &lt;!&ndash; Updated jQuery version &ndash;&gt;-->
+<!--    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">-->
+<!--    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>-->
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@100..1000&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Maven+Pro:wght@400..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Rakkas&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100..900&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/monaco-editor@latest/min/vs/loader.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/highlight.min.js"></script>
+
+    <link rel="stylesheet" href="{% static 'Javascript/navbar.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/code-highlight.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/styles/default.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.27.0/themes/prism.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@editorjs/editorjs@latest/dist/editor.js"></script>
+
+
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+
+
+    <link rel="stylesheet" href="{% static 'css/sltyle.css' %}">
+    <link rel="stylesheet" href="{% static 'css/blogpost.css' %}">
+    <link rel="stylesheet" href="{% static 'css/navbar.css' %}">
+
+
+<link rel="stylesheet" href="{% static 'assets/css/base/base.css' %}">
+<link rel="stylesheet" href="{% static 'assets/css/components/header.css' %}">
+<link rel="stylesheet" href="{% static 'assets/css/components/breakpoints.css' %}">
+<link rel="stylesheet" href="{% static 'assets/css/config/variables.css' %}">
+<link rel="stylesheet" href="{% static 'assets/css/layout/layout.css' %}">
+<link rel="stylesheet" href="{% static 'assets/css/styles.css' %}">
+
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/theme/material.min.css">
+
+    {% block extral %}{% endblock extral %}
+</head>
+<body>
+    <style>
+        /* Basic reset and styling */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: Arial, sans-serif;
+        }
+        #subtopnav {
+            display: flex;
+            align-items: center;
+            overflow-x: auto;
+            white-space: nowrap;
+            padding: 10px;
+            background-color: #333;
+            color: white;
+            position: relative;
+        }
+        #subtopnav a {
+            color: white;
+            padding: 10px 15px;
+            text-decoration: none;
+            font-size: 16px;
+            white-space: nowrap;
+        }
+        #subtopnav a:hover, #subtopnav a.active {
+            background-color: #575757;
+            border-radius: 5px;
+        }
+        #menubtn_container {
+            display: none;
+        }
+        #scroll_left_btn, #scroll_right_btn {
+            cursor: pointer;
+            user-select: none;
+            padding: 0 10px;
+            font-size: 24px;
+        }
+        #scroll_left_btn {
+            position: absolute;
+            left: 0;
+            z-index: 10;
+            display: none;
+        }
+        #scroll_right_btn {
+            position: absolute;
+            right: 0;
+            z-index: 10;
+            display: none;
+        }
+        @media screen and (max-width: 768px) {
+            #menubtn_container {
+                display: block;
+                margin-right: 10px;
+            }
+            #subtopnav {
+                overflow-x: scroll;
+            }
+            #scroll_left_btn, #scroll_right_btn {
+                display: none;
+            }
+        }
+    </style>
+
+
+<div id="subtopnav">
+    <div id="scroll_left_btn" onclick="scrollLeft()">❮</div>
+    <div id="menubtn_container">
+        <a href="javascript:void(0);" class="topnav-icons fa fa-menu" onclick="open_menu()" title="Menu">☰</a>
+    </div>
+    <a href="/html/default.asp" class="ga-nav subtopnav_firstitem" title="HTML Tutorial">HTML</a>
+    <a href="/css/default.asp" class="ga-nav" title="CSS Tutorial">CSS</a>
+    <a href="/js/default.asp" class="ga-nav" title="JavaScript Tutorial">JAVASCRIPT</a>
+    <a href="/sql/default.asp" class="ga-nav active" title="SQL Tutorial">SQL</a>
+    <a href="/python/default.asp" class="ga-nav" title="Python Tutorial">PYTHON</a>
+    <a href="/java/default.asp" class="ga-nav" title="Java Tutorial">JAVA</a>
+    <a href="/php/default.asp" class="ga-nav" title="PHP Tutorial">PHP</a>
+    <a href="/howto/default.asp" class="ga-nav" title="How to">HOW TO</a>
+    <a href="/w3css/default.asp" class="ga-nav" title="W3.CSS Tutorial">W3.CSS</a>
+    <a href="/c/index.php" class="ga-nav" title="C Tutorial">C</a>
+    <a href="/cpp/default.asp" class="ga-nav" title="C++ Tutorial">C++</a>
+    <a href="/cs/index.php" class="ga-nav" title="C# Tutorial">C#</a>
+    <a href="/bootstrap/bootstrap_ver.asp" class="ga-nav" title="Bootstrap Tutorial">BOOTSTRAP</a>
+    <a href="/react/default.asp" class="ga-nav" title="React Tutorial">REACT</a>
+    <a href="/mysql/default.asp" class="ga-nav" title="MySQL Tutorial">MYSQL</a>
+    <a href="/jquery/default.asp" class="ga-nav" title="JQuery Tutorial">JQUERY</a>
+    <a href="/excel/index.php" class="ga-nav" title="Excel Tutorial">EXCEL</a>
+    <a href="/xml/default.asp" class="ga-nav" title="XML Tutorial">XML</a>
+    <!-- Add more links as needed -->
+    <div id="scroll_right_btn" onclick="scrollRight()">❯</div>
+</div>
+
+<script>
+    const subtopnav = document.getElementById('subtopnav');
+
+    function scrollLeft() {
+        subtopnav.scrollBy({
+            left: -200,
+            behavior: 'smooth'
+        });
+    }
+
+    function scrollRight() {
+        subtopnav.scrollBy({
+            left: 200,
+            behavior: 'smooth'
+        });
+    }
+
+    subtopnav.addEventListener('scroll', function() {
+        document.getElementById('scroll_left_btn').style.display = subtopnav.scrollLeft > 0 ? 'block' : 'none';
+        document.getElementById('scroll_right_btn').style.display = subtopnav.scrollWidth > subtopnav.clientWidth + subtopnav.scrollLeft ? 'block' : 'none';
+    });
+
+    function open_menu() {
+        // Add logic to open the menu for small screens
+    }
+</script>
+
+
+    {% comment %} <nav class="navbar navbar-expand-lg navbar-light" style="background-color:#0d6efd;">
+        <a class="nav-link" href="{% url 'blogs:home' %}">
+            <img class="navbar-brand" src="https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=162,fit=crop,q=95/ALpJWvNxnySywjPg/20240522_022637-mP4pW7zrB0TWjR6K.png" alt="mastering data science logo" style="margin-left:5px;box-shadow:0 25px 50px rgba(0,0,0,0.8);padding:10px;border-radius:50%;width:4rem;height:4rem;">
+        </a>
+        <button class="navbar-toggler btn-light m-4 " style='border:solid thin white' type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+            <ul class="navbar-nav text-center mt-4">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'blogs:home' %}">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'blogs:about' %}">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'blogs:post' %}">Blog</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'blogs:all_courses' %}">Courses</a>
+                </li>
+                <li class="nav-item">
+                    {% if request.user.is_authenticated %}
+                        <a class="btn btn-primary" href="{% url 'logusers:logout' %}">Logout</a>
+                    {% else %}
+                        <a class="btn btn-success mb-4" href="{% url 'logusers:login' %}">Login</a>
+                    {% endif %}
+                </li>
+            </ul>
+
+            <div class='profile' style='margin-top:5px;margin-left:1rem'>
+            {% if request.user.is_authenticated %}
+            {% if request.user.profile.image %}
+
+            <a href='{% url 'blogs:profile' %}' class='btn-primary'> <img src="{{ request.user.profile.image.url }}" alt="{{ request.user}} profile" style="width: 40px; height: 40px; border-radius: 50%;"></a>
+            {% else %}
+               <a href='{% url 'blogs:profile' %}'> <img src="{% static 'images/th.jpg' %}" alt="{{ request.user}} profile" style="width: 40px; height: 40px; border-radius: 50%;"></a>
+            {% endif %}
+         {% endif %}
+            </div>
+        </div>
+    </nav> {% endcomment %}
+    
+
+    {% comment %} <!-- Section 1 -->
+    <section class="container">
+        <nav>
+            <div>
+                <img src="{% static 'images/images/Logo.png' %}" alt="Data Skills Academy Logo" />
+            </div>
+            <ul>
+                <li></li>
+                <li><a class='my-nav-links' href="{% url 'blogs:home' %}">Home</a></li>
+                <li><a class='my-nav-links' href="{% url 'blogs:post' %}">Blog</a></div>
+                <li><a  class='my-nav-links' href="{% url 'blogs:about' %}">About</a></li>
+                <li><a class='my-nav-links' href="{% url 'blogs:all_courses' %}">Courses</a></li>
+                <li><button onclick="location.href='{% url 'logusers:login' %}'" class='my-nav-links' >login</button></li>
+                <li >
+                    {% if request.user.is_authenticated %}
+                        <a  href="{% url 'logusers:logout' %}" class='my-nav-links'>Logout</a>
+                    {% else %}
+                        <a  href="{% url 'logusers:login' %}" class='my-nav-links'>Login</a>
+                    {% endif %}
+                </li>
+            </ul>
+            <span class="material-symbols-outlined hamburger" class='my-nav-links'>menu</span>
+        </nav>
+    </section> {% endcomment %}
+
+
+
+    <main>{% block content %}{% endblock %}</main>
+    <footer class="bg-dark text-light pt-5 pb-3">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-3">
+                    <h5>About Us</h5>
+                    <p>Unlock the latest insights and strategies in data analytics. We provide innovative solutions and connect you with the expertise you need to drive your business forward.</p>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <h5>Contact Us</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="mailto:info@code-with-kenneh.com" class="text-light">info@code-with-kenneh.com</a></li>
+                        <li><a href="tel:+49017669258588" class="text-light">+49 017 669 258 588</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <h5>Newsletter</h5>
+                    <p>Stay updated with the latest trends and insights in data analytics. Subscribe to our newsletter.</p>
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-12 text-center">
+                    <p>© 2024. All rights reserved. | <a href="#" class="text-light">Privacy Policy</a> | <a href="#" class="text-light">Terms of Service</a></p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Correct script src attribute -->
+    <script src="{% static 'Javascript/post.js' %}"></script>
+    <script src="{% static 'Javascript/style.js' %}"></script>
+
+    <!--<script>-->
+    <!--    var textareas = document.getElementsByClassName('codemirror-textarea');-->
+    <!--    for (var i = 0; i < textareas.length; i++) {-->
+    <!--        CodeMirror.fromTextArea(textareas[i], {-->
+    <!--            mode: 'markdown',-->
+    <!--            theme: 'monokai',-->
+    <!--            lineNumbers: true,-->
+    <!--        });-->
+    <!--    }-->
+    <!--</script>-->
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            hljs.highlightAll();
+        });
+
+    </script>
+
+
+
+    <script>
+        $(document).ready(function(){
+           $('.dropdown-toggle').dropdown();
+       });
+   </script>
+</body>
+</html>

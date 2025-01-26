@@ -1,0 +1,80 @@
+{% extends 'blogs/base.html' %}
+{% block title %} Add Topic | {% endblock %}
+{% load widget_tweaks %}
+{% load static %}
+{% load highlight %}
+{{ form.media }}
+<style>
+    {{ pygments_css|safe }}
+</style>
+
+{% block content %}
+<div class="container-fluid mt-4">
+    <div class="row">
+        <!-- Left side - Topics list -->
+        <aside class="col-md-3 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Topics</h5>
+                    <ul class="list-group list-group-flush">
+                        <h2>Python programming</h2>
+                        {% for topic in topics %}
+                        {% if 'Python' in topic.course.title %}
+
+                            <li class="list-group-item">
+                                <a href="{% url 'blogs:topics' topic.id %}">{{ topic.title }}</a>
+                            </li>
+                        {% else %}
+                        {% endif %}
+                        {% endfor %}
+                        <h2>Javascript programming</h2>
+                        {% for topic in topics %}
+
+                          {% if 'Javascript' in topic.course.title %}
+                            <li class="list-group-item">
+                                <a href="{% url 'blogs:topics' topic.id %}">{{ topic.title }}</a>
+                            </li>
+                        {% else %}
+                        {% endif %}
+
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Right side - Single topic -->
+        <section class="col-md-9 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    {% if topic %}
+                        <h1 class="card-title" style="font-family:Roboto; sans-serif;
+                             font-weight: 800;              
+                        font-style: normal;margin-bottom:50px;">{{ topic.title }}</h1>
+
+                        <article class="codehilite" >
+                            {{ topic.body|syntax_highlight|safe }}
+                       </article>
+                      <a href="{% url 'python-ide:access_code' %}">Open Editor to practice </a></p> you can comeback to this section</p>
+                    
+                        
+                    {% else %}
+                        <h1 class="card-title">Select a topic</h1>
+                        <p>Please select a topic from the list on the left to view its details.</p>
+                    {% endif %}
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+
+<style>
+    {{ css_string|safe }}
+</style>
+
+{% block extral %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+{% endblock extral %}
+{% endblock %}
